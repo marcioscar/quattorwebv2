@@ -116,8 +116,10 @@ export default function Index() {
           <div>
             <a
               href="https://wa.me/5561993190568"
-              className="mt-2 inline-flex items-center  text-stone-800  ">
-              <Button className=" bg-orange-400 text-xl w-36">Agendar</Button>
+              className="mt-2 inline-flex items-center   text-white  ">
+              <Button className=" bg-orange-400 rounded-xl text-xl w-36">
+                Agendar
+              </Button>
             </a>
           </div>
           <div className="inline-flex items-center place-content-center space-x-8 mt-2 ">

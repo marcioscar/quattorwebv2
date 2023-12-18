@@ -4,11 +4,11 @@ import { IoMdMenu, IoMdClose, IoIosLogOut } from "react-icons/io";
 
 export default function Index(aluno: any) {
   const [navbar, setNavbar] = useState(false);
-  const activeClassName = "text-orange-500";
+  const activeClassName = "text-orange-600";
   const NoaActiveClassName = "text-orange-white";
 
   return (
-    <nav className=" w-[97%] md:w-full rounded-md  mx-auto  bg-stone-300 print:hidden">
+    <nav className=" w-full md:w-full rounded-md  mx-auto  bg-stone-300 print:hidden">
       <div className="justify-between  pl-2 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div>
           <div className="flex items-center justify-between py-3 md:py-5 ">
@@ -35,6 +35,19 @@ export default function Index(aluno: any) {
                   <IoIosLogOut className=" ml-4 w-6 h-6" />
                 </NavLink>
               </>
+            )}
+            {!aluno.aluno?.idMember && (
+              <div className=" md:hidden  text-sm text-white py-1 px-2  shadow  bg-orange-400 rounded-2xl hover:text-blue-600">
+                <NavLink
+                  to="/login"
+                  prefetch="render"
+                  onClick={() => setNavbar(!navbar)}
+                  className={({ isActive }) =>
+                    isActive ? activeClassName : NoaActiveClassName
+                  }>
+                  ALUNO
+                </NavLink>
+              </div>
             )}
 
             <div className="md:hidden">
