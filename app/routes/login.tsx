@@ -39,7 +39,6 @@ export const action: ActionFunction = async ({ request }) => {
   const alunoa = await getAluno(matricula);
   const aluno = alunoa[0];
 
-  console.log(aluno);
   // console.log(basic);
   let alunoGym = [];
   if (aluno.membershipStatus === "Inactive") {
@@ -50,7 +49,7 @@ export const action: ActionFunction = async ({ request }) => {
   const plano = _.filter(aluno.memberships, { membershipStatus: "active" }).map(
     (n) => n.name
   );
-  console.log(plano);
+
   // const spinning = plano.filter(
   //   (s) =>
   //     s.includes("FITNESS") || s.includes("SPINNING") || s.includes("TOTAL")
@@ -75,7 +74,7 @@ export const action: ActionFunction = async ({ request }) => {
   //     message: "Plano do Aluno não inclui Spinning",
   //   };
   // }
-  console.log(aluno.membershipStatus, aluno.idMember, plano);
+
   const session = await getSession(request.headers.get("Cookie"));
   session.set("aluno", {
     id: aluno.idMember,
@@ -83,7 +82,7 @@ export const action: ActionFunction = async ({ request }) => {
     status: aluno.membershipStatus,
   });
 
-  return redirect(redi as string, {
+  return redirect("/aluno", {
     headers: {
       "Set-Cookie": await commitSession(session),
     },

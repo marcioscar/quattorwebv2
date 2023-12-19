@@ -553,7 +553,7 @@ export default function Treino() {
           </h2>
           <div className="text-stone-600 text-center place-content-center gap-2  mx-auto grid grid-cols-1 md:gap-2 md:grid-cols-4 lg:grid-cols-4 lg:container-2xl">
             {ABDOME.length > 0 && (
-              <Card className=" border-0">
+              <Card className="  border-stone-100 shadow   rounded-3xl">
                 <CardHeader>
                   <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="item-1">
@@ -585,7 +585,7 @@ export default function Treino() {
             )}
 
             {BICEPS.length > 0 && (
-              <Card className=" border-0">
+              <Card className="  border-stone-100 shadow   rounded-3xl">
                 <CardHeader>
                   <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="item-1">
@@ -617,7 +617,7 @@ export default function Treino() {
             )}
 
             {COSTAS.length > 0 && (
-              <Card className=" border-0">
+              <Card className="  border-stone-100 shadow   rounded-3xl">
                 <CardHeader>
                   <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="item-1">
@@ -649,7 +649,7 @@ export default function Treino() {
             )}
 
             {GLUTEOS.length > 0 && (
-              <Card className=" border-0">
+              <Card className="  border-stone-100 shadow   rounded-3xl">
                 <CardHeader>
                   <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="item-1">
@@ -681,7 +681,7 @@ export default function Treino() {
             )}
 
             {MEMBROS_INFERIORES_GERAL.length > 0 && (
-              <Card className=" border-0">
+              <Card className="  border-stone-100 shadow   rounded-3xl">
                 <CardHeader>
                   <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="item-1">
@@ -712,7 +712,7 @@ export default function Treino() {
               </Card>
             )}
             {MEMBROS_SUPERIORES_GERAL.length > 0 && (
-              <Card className=" border-0">
+              <Card className="  border-stone-100 shadow   rounded-3xl">
                 <CardHeader>
                   <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="item-1">
@@ -743,7 +743,7 @@ export default function Treino() {
               </Card>
             )}
             {MEMBROS_SUPERIORES_1.length > 0 && (
-              <Card className=" border-0">
+              <Card className="  border-stone-100 shadow   rounded-3xl">
                 <CardHeader>
                   <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="item-1">
@@ -774,7 +774,7 @@ export default function Treino() {
               </Card>
             )}
             {MEMBROS_SUPERIORES_2.length > 0 && (
-              <Card className=" border-0">
+              <Card className="  border-stone-100 shadow   rounded-3xl">
                 <CardHeader>
                   <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="item-1">
@@ -806,7 +806,7 @@ export default function Treino() {
             )}
 
             {OMBROS.length > 0 && (
-              <Card className=" border-0">
+              <Card className="  border-stone-100 shadow   rounded-3xl">
                 <CardHeader>
                   <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="item-1">
@@ -837,7 +837,7 @@ export default function Treino() {
               </Card>
             )}
             {PANTURRILHA.length > 0 && (
-              <Card className=" border-0">
+              <Card className="  border-stone-100 shadow   rounded-3xl">
                 <CardHeader>
                   <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="item-1">
@@ -869,7 +869,7 @@ export default function Treino() {
             )}
 
             {PEITORAL.length > 0 && (
-              <Card className=" border-0">
+              <Card className="  border-stone-100 shadow   rounded-3xl">
                 <CardHeader>
                   <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="item-1">
@@ -900,7 +900,7 @@ export default function Treino() {
               </Card>
             )}
             {POSTERIORES_DE_COXAS.length > 0 && (
-              <Card className=" border-0">
+              <Card className="  border-stone-100 shadow   rounded-3xl">
                 <CardHeader>
                   <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="item-1">
@@ -931,7 +931,7 @@ export default function Treino() {
               </Card>
             )}
             {QUADS.length > 0 && (
-              <Card className=" border-0">
+              <Card className="  border-stone-100 shadow   rounded-3xl">
                 <CardHeader>
                   <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="item-1">
@@ -962,7 +962,7 @@ export default function Treino() {
               </Card>
             )}
             {TRICEPS.length > 0 && (
-              <Card className=" border-0">
+              <Card className="  border-stone-100 shadow   rounded-3xl">
                 <CardHeader>
                   <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="item-1">
