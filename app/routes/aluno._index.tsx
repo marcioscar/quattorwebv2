@@ -80,6 +80,7 @@ export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
 
   let values = Object.fromEntries(form);
+  console.log(form.get("_action"));
   const _action = form.get("_action");
   if (_action === "done") {
     await updateHistoricoExe(values);
@@ -1076,7 +1077,17 @@ export default function Treino() {
                 {e.exercicios.map((exe: any, index: any) => (
                   <div className={isChecked(exe.nome)} key={index}>
                     <fetcher.Form method="post">
+                      {/* <fetcher.Form
+                      onSubmit={(e) => {
+                        if (fetcher.formData?.get("_action") === "undone") {
+                          if (!confirm("Tem certeza que quer apagar?")) {
+                            e.preventDefault();
+                          }
+                        }
+                      }}
+                      method="post"> */}
                       {/* <Form method="post"> */}
+
                       <input
                         readOnly
                         hidden
@@ -1101,7 +1112,8 @@ export default function Treino() {
                       <div className="flex mb-2 flex-row justify-between ">
                         <div className={isCheckedTitle(exe.nome)}>
                           {exe.nome}
-                          {isSaving ? (
+                          {isSaving &&
+                          fetcher.formData?.get("exenome") === exe.nome ? (
                             <span className="ml-3">
                               <svg
                                 role="status"
