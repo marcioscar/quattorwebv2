@@ -40,14 +40,14 @@ export default function Index() {
 			</div>
 			<div className='col-span-12 rounded-lg md:h-[523px] md:row-span-2 md:col-span-5'>
 				<img
-					src='/assets/capa.jpg'
+					src='/assets/capamulher.jpeg'
 					alt='background'
 					className=' object-cover w-full  h-[212px] md:h-[523px] md:w-full rounded-lg '
 				/>
 				<img
 					src='/assets/capasombra.png'
 					alt='logo'
-					className='w-1/2 -mt-[150px]  ml-48 md:ml-48  md:w-1/2 md:-mt-[210px]  '
+					className='w-5/12 -mt-[130px]  ml-10 md:ml-10  md:w-1/2 md:-mt-[180px]  '
 				/>
 				{/* <p className=" text-white font-medium ml-44 mt-5 md:ml-48 md:text-xl">
           Rua 5 Sul - Águas Claras
@@ -150,7 +150,7 @@ export default function Index() {
 				</div>
 			</div>
 
-			<div className='  col-span-12 md:flex bg-stone-50 border md:col-span-3 w-full items-center  justify-around  rounded-lg  p-3 shadow-3xl shadow-shadow-500 '>
+			<div className='  col-span-12 md:flex bg-stone-100 border md:col-span-3 w-full items-center  justify-around  rounded-lg  p-3 shadow-3xl shadow-shadow-500 '>
 				<div className='flex items-center space-x-2'>
 					<div className='ml-4'>
 						<p className='text-base font-medium text-orange-500 dark:text-white'>
@@ -162,7 +162,7 @@ export default function Index() {
 					</div>
 					<div className=''>
 						<img
-							className='h-[110px] min-w-20   opacity-60 object-cover rounded-lg'
+							className='h-[110px] min-w-20  w-44   object-cover rounded-lg'
 							src='/assets/musculacao.jpg'
 							alt=''
 						/>
@@ -177,7 +177,7 @@ export default function Index() {
           className="opacity-50 rotate-2 object-cover h-3/4 w-2/6 rounded-md "
         />
       </div> */}
-			<div className=' col-span-12  md:flex bg-stone-50 border md:col-span-3 w-full items-center  justify-around  rounded-lg  p-3 shadow-3xl shadow-shadow-500 '>
+			<div className=' col-span-12  md:flex bg-stone-100 border md:col-span-3 w-full items-center  justify-around  rounded-lg  p-3 shadow-3xl shadow-shadow-500 '>
 				<div className='flex items-center space-x-2'>
 					<div className='ml-4'>
 						<p className='text-base font-medium text-orange-500 dark:text-white'>
@@ -189,7 +189,7 @@ export default function Index() {
 					</div>
 					<div className=''>
 						<img
-							className='h-[110px] w-40   opacity-60 object-cover rounded-lg'
+							className='h-[110px] w-44 object-cover rounded-lg'
 							src='/assets/natacao.jpg'
 							alt=''
 						/>
@@ -201,7 +201,7 @@ export default function Index() {
 					<Aulas aulas={TodasAulas} />
 				</div>
 			</div>
-			<div className=' col-span-12  md:flex bg-stone-50 border md:col-span-3 w-full items-center  justify-around  rounded-lg  p-3 shadow-3xl shadow-shadow-500 '>
+			<div className=' col-span-12  md:flex bg-stone-100 border md:col-span-3 w-full items-center  justify-around  rounded-lg  p-3 shadow-3xl shadow-shadow-500 '>
 				<div className='flex items-center space-x-2'>
 					<div className='ml-4'>
 						<p className='text-base font-medium text-orange-500 dark:text-white'>
@@ -214,7 +214,7 @@ export default function Index() {
 					</div>
 					<div className=''>
 						<img
-							className='h-[110px]  w-40    opacity-60 object-cover rounded-lg'
+							className='h-[110px]  w-40 object-cover rounded-lg'
 							src='/assets/prime.jpg'
 							alt=''
 						/>
@@ -222,7 +222,7 @@ export default function Index() {
 				</div>
 			</div>
 
-			<div className=' col-span-12 md:flex bg-stone-50 border md:col-span-3 w-full items-center  justify-around  rounded-lg  p-3 shadow-3xl shadow-shadow-500 '>
+			<div className=' col-span-12 md:flex bg-stone-100 border md:col-span-3 w-full items-center  justify-around  rounded-lg  p-3 shadow-3xl shadow-shadow-500 '>
 				<div className='flex items-center space-x-2'>
 					<div className='ml-4'>
 						<p className='text-base font-medium text-orange-500 dark:text-white'>
@@ -235,7 +235,7 @@ export default function Index() {
 					</div>
 					<div className=''>
 						<img
-							className='h-[110px] w-40 opacity-60 object-cover rounded-lg'
+							className='h-[110px] w-40 object-cover rounded-lg'
 							src='/assets/ballet.jpg'
 							alt=''
 						/>
