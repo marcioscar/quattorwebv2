@@ -47,7 +47,7 @@ export default function Index() {
 				<img
 					src='/assets/capasombra.png'
 					alt='logo'
-					className='w-5/12 -mt-[130px]  ml-10 md:ml-10  md:w-1/2 md:-mt-[180px]  '
+					className='w-5/12 -mt-[130px]  ml-10 md:ml-10  md:w-1/2 md:-mt-[180px] xl:-mt-[210px]  '
 				/>
 				{/* <p className=" text-white font-medium ml-44 mt-5 md:ml-48 md:text-xl">
           Rua 5 Sul - Águas Claras
