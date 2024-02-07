@@ -272,7 +272,7 @@ export default function Treino() {
 		// @ts-ignore
 		checked.includes(item)
 			? "bg-white mb-2 text-stone-300 font-light  p-2 rounded-lg  shadow"
-			: "bg-white/60 mb-2  font-light  p-2 rounded-lg  ";
+			: "bg-white/80 mb-2  font-light  p-2 rounded-lg  ";
 
 	var isCheckedTitle = (item: any) =>
 		// @ts-ignore
