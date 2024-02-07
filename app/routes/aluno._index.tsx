@@ -272,7 +272,7 @@ export default function Treino() {
 		// @ts-ignore
 		checked.includes(item)
 			? "bg-white mb-2 text-stone-300 font-light  p-2 rounded-lg  shadow"
-			: "bg-stone-100 mb-2  font-light  p-2 rounded-lg  ";
+			: "bg-white/60 mb-2  font-light  p-2 rounded-lg  ";
 
 	var isCheckedTitle = (item: any) =>
 		// @ts-ignore
@@ -351,12 +351,12 @@ export default function Treino() {
 	// })
 	// 	.map((n) => n.name)
 	// 	.toString();
-	console.log(historicoTreinos?.planejados.length > 0);
+
 	return (
 		<>
 			{/* <Outlet /> */}
 
-			<div className=' px-2 mx-auto '>
+			<div className=' px-2 mx-auto bg-white/80 h-screen '>
 				<div className='text-center'>
 					<img
 						src={aluno?.photoUrl ? aluno?.photoUrl : "/user.png"}
