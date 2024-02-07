@@ -8,7 +8,7 @@ export default function Index(aluno: any) {
 	const NoaActiveClassName = "text-orange-white";
 
 	return (
-		<nav className=' w-full md:w-full rounded-md  mx-auto  bg-stone-300 print:hidden'>
+		<nav className=' w-full md:w-full rounded-md  mx-auto  bg-white/30 mb-4 print:hidden'>
 			<div className='justify-between  pl-2 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8'>
 				<div>
 					<div className='flex items-center justify-between py-3 md:py-5 '>
@@ -37,7 +37,7 @@ export default function Index(aluno: any) {
 							</>
 						)}
 						{!aluno.aluno?.idMember && (
-							<div className=' border items-center space-x-2 bg-white/50  shadow rounded-xl   p-1 flex md:hidden '>
+							<div className=' border items-center space-x-2 bg-black  shadow rounded-xl   p-2 flex md:hidden '>
 								<div>
 									<img
 										src='/assets/avatarlauno.png'
@@ -45,7 +45,7 @@ export default function Index(aluno: any) {
 										className='w-5'
 									/>
 								</div>
-								<div className='text-sm'>
+								<div className='text-sm text-white '>
 									<NavLink
 										to='/login'
 										prefetch='render'

@@ -17,8 +17,8 @@ export default function Index() {
 	const { TodasAulas } = useLoaderData<typeof loader>();
 
 	return (
-		<div className='grid md:container  w-[97%]  mx-auto mt-1  grid-cols-12 gap-3'>
-			<div className='bg-stone-200 hidden md:rounded-lg md:block shadow-sm md:h-[523px] md:row-span-2 md:col-span-3'>
+		<div className='   h-full grid md:container  w-[97%]  mx-auto mt-1  grid-cols-12 gap-3'>
+			<div className='bg-white/40   hidden md:rounded-lg md:block shadow-sm md:h-[523px] md:row-span-2 md:col-span-3'>
 				<div className='flex flex-col text-center  '>
 					<h1 className='font-bold text-3xl text-stone-800 mt-[104px]'>
 						Funcionamento
@@ -54,7 +54,7 @@ export default function Index() {
         </p> */}
 			</div>
 
-			<div className=' hidden md:block md:bg-stone-200 md:rounded-lg md:shadow-sm md:h-[340px] md:row-span-1 md:col-span-4'>
+			<div className=' hidden md:block md:bg-white/40 md:rounded-lg md:shadow-sm md:h-[340px] md:row-span-1 md:col-span-4'>
 				<div className='flex flex-col text-center  '>
 					<h1 className=' font-medium text-4xl text-stone-800 mt-14'>
 						Contatos
@@ -80,7 +80,7 @@ export default function Index() {
 					</div>
 				</div>
 			</div>
-			<div className='md:hidden bg-stone-200 rounded-lg mt-2 mb-2 col-span-6  '>
+			<div className='md:hidden bg-white/40 rounded-lg mt-2 mb-2 col-span-6  '>
 				<div className='flex flex-col text-center  mb-4 '>
 					<h1 className='font-bold text-xl text-stone-800 mt-4'>
 						Funcionamento
@@ -99,7 +99,7 @@ export default function Index() {
 					</div>
 				</div>
 			</div>
-			<div className='md:hidden bg-stone-200 rounded-lg mt-2 mb-2 shadow-sm  col-span-6'>
+			<div className='md:hidden bg-white/40 rounded-lg mt-2 mb-2 shadow-sm  col-span-6'>
 				<div className='flex flex-col text-center  '>
 					<h1 className=' font-bold text-xl text-stone-800  mt-4'>Contatos</h1>
 					<div>
@@ -122,7 +122,7 @@ export default function Index() {
 							</Button>
 						</a>
 					</div>
-					<div className='inline-flex items-center place-content-center space-x-8 mt-2 '>
+					<div className='inline-flex mb-2 items-center place-content-center space-x-8 mt-2 '>
 						<a href='https://www.instagram.com/quattor_academia/#'>
 							<FaInstagram className=' text-3xl text-stone-400' />
 						</a>
@@ -133,7 +133,7 @@ export default function Index() {
 				</div>
 			</div>
 
-			<div className=' hidden md:block md:bg-stone-200 md:rounded-lg md:shadow-sm md:h-[174px] md:col-span-4'>
+			<div className=' hidden md:block md:bg-white/40 md:rounded-lg md:shadow-sm md:h-[174px] md:col-span-4'>
 				<div className='flex flex-col text-center  '>
 					<h1 className=' font-medium text-3xl text-stone-800 mt-8'>
 						Agende uma aula
@@ -150,7 +150,7 @@ export default function Index() {
 				</div>
 			</div>
 
-			<div className='  col-span-12 md:flex bg-stone-100 border md:col-span-3 w-full items-center  justify-around  rounded-lg  p-3 shadow-3xl shadow-shadow-500 '>
+			<div className='  col-span-12 md:flex bg-white/40   md:col-span-3 w-full items-center  justify-around  rounded-lg  p-3 shadow-3xl shadow-shadow-500 '>
 				<div className='flex items-center space-x-2'>
 					<div className='ml-4'>
 						<p className='text-base font-medium text-orange-500 dark:text-white'>
@@ -177,7 +177,7 @@ export default function Index() {
           className="opacity-50 rotate-2 object-cover h-3/4 w-2/6 rounded-md "
         />
       </div> */}
-			<div className=' col-span-12  md:flex bg-stone-100 border md:col-span-3 w-full items-center  justify-around  rounded-lg  p-3 shadow-3xl shadow-shadow-500 '>
+			<div className=' col-span-12  md:flex bg-white/40   md:col-span-3 w-full items-center  justify-around  rounded-lg  p-3 shadow-3xl shadow-shadow-500 '>
 				<div className='flex items-center space-x-2'>
 					<div className='ml-4'>
 						<p className='text-base font-medium text-orange-500 dark:text-white'>
@@ -196,12 +196,12 @@ export default function Index() {
 					</div>
 				</div>
 			</div>
-			<div className='hidden md:block md:col-span-6 md:row-span-2 md:bg-stone-200 md:rounded-lg'>
+			<div className='hidden md:block md:col-span-6 md:row-span-2 md:bg-white/60 md:rounded-lg'>
 				<div className='overflow-auto rounded-lg mb-2 max-h-[280px] '>
 					<Aulas aulas={TodasAulas} />
 				</div>
 			</div>
-			<div className=' col-span-12  md:flex bg-stone-100 border md:col-span-3 w-full items-center  justify-around  rounded-lg  p-3 shadow-3xl shadow-shadow-500 '>
+			<div className=' col-span-12  md:flex bg-white/40  md:col-span-3 w-full items-center  justify-around  rounded-lg  p-3 shadow-3xl shadow-shadow-500 '>
 				<div className='flex items-center space-x-2'>
 					<div className='ml-4'>
 						<p className='text-base font-medium text-orange-500 dark:text-white'>
@@ -222,7 +222,7 @@ export default function Index() {
 				</div>
 			</div>
 
-			<div className=' col-span-12 md:flex bg-stone-100 border md:col-span-3 w-full items-center  justify-around  rounded-lg  p-3 shadow-3xl shadow-shadow-500 '>
+			<div className=' col-span-12 md:flex bg-white/40   md:col-span-3 w-full items-center  justify-around  rounded-lg  p-3 shadow-3xl shadow-shadow-500 '>
 				<div className='flex items-center space-x-2'>
 					<div className='ml-4'>
 						<p className='text-base font-medium text-orange-500 dark:text-white'>
@@ -242,7 +242,7 @@ export default function Index() {
 					</div>
 				</div>
 			</div>
-			<div className='] md:hidden col-span-12  bg-stone-200 rounded-lg'>
+			<div className=' md:hidden col-span-12  bg-blur bg-white/80 rounded-lg'>
 				<div className='overflow-auto rounded-lg mb-2 max-h-[280px] '>
 					<Aulas aulas={TodasAulas} />
 				</div>
