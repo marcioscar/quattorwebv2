@@ -127,7 +127,7 @@ export default function Idaluno() {
 	return (
 		<div>
 			<Outlet />
-			<Form method='post'>
+			<Form method='post' className='bg-white'>
 				<input
 					hidden
 					type='number'

@@ -1,5 +1,6 @@
 import { prisma } from "./prisma.server";
 import { v4 as uuidv4 } from "uuid";
+
 export const getExercicios = async (id: any) => {
   return prisma.treinos.findUnique({
     where: {
@@ -7,10 +8,21 @@ export const getExercicios = async (id: any) => {
     },
   });
 };
+
+export const getExercisebyGroup = async (group: any, week:any) => {
+  return prisma.treinos.findMany({
+    where: {
+        semana: +week,
+        grupo : group,
+    },
+  });
+};
+
+
 export const getTreinos = async (semana: any) => {
   return prisma.treinos.findMany({
     where: {
-      semana: semana,
+      semana: +semana,
     },
   });
 };
@@ -65,6 +77,7 @@ export const updateCadastroTreino = async (
 };
 
 export const updateTreino = async (treino: any) => {
+    console.log(treino)
   const existe = await prisma.treinos.findFirst({
     where: {
       grupo: treino.grupo,
@@ -79,6 +92,7 @@ export const updateTreino = async (treino: any) => {
     : "000000000000000000000000";
 
   return prisma.treinos.upsert({
+
     where: {
       id: idTreino,
     },
@@ -89,7 +103,7 @@ export const updateTreino = async (treino: any) => {
           Repeticoes: treino.repeticoes,
           carga: treino.carga,
           obs: treino.obs,
-          video: treino.video,
+          video: treino.video? treino.video: (treino.grupo+ '.png'),
           execid: uuidv4(),
         },
       },
@@ -102,7 +116,7 @@ export const updateTreino = async (treino: any) => {
         Repeticoes: treino.repeticoes,
         carga: treino.carga,
         obs: treino.obs,
-        video: treino.video,
+        video: treino.video? treino.video: (treino.grupo+ '.png'),
         execid: uuidv4(),
       },
     },

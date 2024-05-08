@@ -19,8 +19,14 @@ export const getAluno = async (matricula: number) => {
   );
 
   // return Object.assign({}, aluno.json());
+
   return aluno.json();
 };
+
+
+
+ 
+ 
 
 export const gstBasico = async (matricula: number) => {
   if (!matricula) {

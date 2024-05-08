@@ -1,10 +1,44 @@
-import { getTreinos } from "@/utils/treinos.server";
-import type { LoaderFunctionArgs } from "@remix-run/node";
+import { getExercisebyGroup, getTreinos } from "@/utils/treinos.server";
+import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/react";
+import _ from "lodash";
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const treinos = await getTreinos(0o1);
+export const loader = async ({ request,params }: LoaderFunctionArgs) => {
+
+
+ let { searchParams } = new URL(request.url);
+ 
+  let week = searchParams?.get("week");
+  
+    const treinos = await getTreinos(week);
+
   const grupos = treinos.map((t)=>t.grupo) 
     return json({ grupos });
 };
 
+export const action = async ({ request }: ActionFunctionArgs) => {
+  
+    switch (request.method) {
+    case "POST": {
+         const param = await request.json();
+            const group = param.groupSelected
+            const week = param.week
+            console.log(param)
+            console.log(group)
+            const exercisesGroup =  await getExercisebyGroup(group, week)
+            const exercises = _.flatten(exercisesGroup.map((e)=> e.exercicios))
+            console.log(_.flatten(exercises))
+            return json(exercises)
+      /* handle "POST" */
+    }
+    case "PUT": {
+      /* handle "PUT" */
+    }
+    case "PATCH": {
+      /* handle "PATCH" */
+    }
+    case "DELETE": {
+      /* handle "DELETE" */
+    }
+  }
+};

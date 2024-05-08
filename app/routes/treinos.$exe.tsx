@@ -33,7 +33,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 
 export default function Treino() {
 	const { exercicios } = useLoaderData<typeof loader>();
-
+	console.log(exercicios);
 	return (
 		<ul>
 			<div className='grid grid-cols-12 py-2 gap-2'>
