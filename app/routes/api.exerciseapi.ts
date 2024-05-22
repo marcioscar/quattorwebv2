@@ -1,17 +1,16 @@
-import { getExercisebyGroup, getTreinos } from "@/utils/treinos.server";
+import { getHistoricoExeDate, updateHistoricoExe } from "@/utils/aluno.server";
 import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/react";
-import _ from "lodash";
+
 
 export const loader = async ({ request,params }: LoaderFunctionArgs) => {
  let { searchParams } = new URL(request.url);
  
-  let week = searchParams?.get("week");
+  let register = searchParams?.get("register");
   
-    const treinos = await getTreinos(week);
-
-  const grupos = treinos.map((t)=>t.grupo) 
-    return json({ grupos });
+    const historic = await getHistoricoExeDate(register);
+    
+    return json(historic);
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
@@ -19,12 +18,10 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     switch (request.method) {
     case "POST": {
          const param = await request.json();
-            const group = param.groupSelected
-            const week = param.week
-            const exercisesGroup =  await getExercisebyGroup(group, week)
-            const exercises = _.flatten(exercisesGroup.map((e)=> e.exercicios))
+         
+         return updateHistoricoExe(param)
             
-            return json(exercises)
+            
       /* handle "POST" */
     }
     case "PUT": {

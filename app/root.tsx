@@ -52,7 +52,8 @@ export default function App() {
 				<Links />
 			</head>
 			<body>
-				<div className=' h-full min-h-screen bg-[url(/assets/fundo.jpeg)] '>
+				<div className=' h-full min-h-screen  bg-stone-200 '>
+					{/* <div className=' h-full min-h-screen bg-[url(/assets/fundo.jpeg)] '></div> */}
 					<Nav aluno={aluno} />
 					<Outlet />
 					<ScrollRestoration />

@@ -1,8 +1,11 @@
 // @ts-ignore
 import { endOfDay, format, getWeek } from "date-fns";
+import { ptBR } from "date-fns/locale";
 import { prisma } from "./prisma.server";
 import fetch from "@remix-run/web-fetch";
 import { v4 as uuidv4 } from "uuid";
+
+import _ from "lodash";
 
 const EVO_AUTH = process.env.NEXT_PUBLIC_EVO_AUTH;
 
@@ -162,7 +165,7 @@ export const updateHistoricoExe = async (historico: any) => {
         push: {
           grupo: historico.treino,
           data: dataformatada,
-          carga: historico.carga + " kg",
+          carga: historico.carga? historico.carga + " kg": historico.carga ,
           nome: historico.exenome,
           obs: historico.obs,
         },
@@ -173,7 +176,7 @@ export const updateHistoricoExe = async (historico: any) => {
       histexe: {
         grupo: historico.treino,
         data: dataformatada,
-        carga: historico.carga + " kg",
+        carga: historico.carga? historico.carga + " kg": historico.carga ,
         nome: historico.exenome,
         obs: historico.obs,
       },
@@ -489,6 +492,56 @@ export const getHistoricoExe = async (historico: any) => {
       aluno: parseInt(historico),
     },
   });
+};
+
+
+
+export const getHistoricoExeDate = async (historico: any) => {
+  if (!historico) {
+    return null;
+  }
+
+
+
+
+    const exe = (await prisma.historicoExercicios.findUnique({
+        where: {
+            aluno: parseInt(historico),
+        },
+        
+    }))
+
+    const exercicios = _.orderBy(exe?.histexe, 'data', "desc")
+    
+
+ const resp = ( _.map(
+				_.mapValues(exercicios, function (o: any) {
+					return {
+						treino: o.nome,
+						carga: o.carga,
+						grupo: o.grupo,
+						obs: o.obs,
+						date: format(new Date(o.data), "EEE - dd/MM", {locale: ptBR}),
+					};
+				})
+			))
+
+
+
+
+    const result = _.chain(_.take(resp, 60))
+        .groupBy("date")
+        .map(users => ({
+            title: users[0].date,
+            // order: users[0].order,
+            data: users.map(({  ...o }) => o)
+        }))
+        .value();
+
+        
+console.log(result)
+  return result
+
 };
 
 export const deleteTreinoPlanejado = async (treino: any) => {

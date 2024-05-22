@@ -2,6 +2,9 @@ import { getAluno, getAlunoGym } from "@/utils/aluno.server";
 
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/react";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
+import _ from "lodash";
 
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
@@ -61,13 +64,20 @@ export const action = async ({ request }: ActionFunctionArgs) => {
                 const alunoGymtudo = await getAlunoGym(Number(registration));
                 alunoGym = alunoGymtudo.map((a: any) => a.gympassId);
             }
+        const Plano = _.filter(aluno.memberships, { membershipStatus: "active" }).map(
+            (n) => (n.name)
+        );
 
-            
-        const student = {
+        const vencimentoPlano = _.filter(aluno.memberships, { membershipStatus: "active" }).map(
+            (n) => ( format(new Date(n.endDate.toString()), "dd/MM/yyyy", {locale: ptBR}).toString())
+        );
+            const student = {
             photo : aluno.photoUrl,
             name: aluno.firstName +' '+ aluno.lastName,
             status: aluno.membershipStatus,
-            registration: aluno.idMember
+            registration: aluno.idMember,
+            endDate: vencimentoPlano.toString(),
+            plano: Plano.toString()
         }
             
 

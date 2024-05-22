@@ -62,7 +62,7 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function Idaluno() {
-	const { aluno, historico } = useLoaderData();
+	const { aluno, historico }: any = useLoaderData();
 	const ultimosTreinos = _.takeRight(historico?.treinos, 3);
 
 	const transition = useNavigation();
@@ -125,9 +125,9 @@ export default function Idaluno() {
 	const ultimosFeitos = _.takeRight(grupotreinoFeito, 7);
 
 	return (
-		<div>
+		<div className=' container mx-auto p-3 bg-stone-50'>
 			<Outlet />
-			<Form method='post' className='bg-white'>
+			<Form method='post' className='bg-stone-50'>
 				<input
 					hidden
 					type='number'
@@ -135,7 +135,7 @@ export default function Idaluno() {
 					readOnly
 					defaultValue={aluno.idMember}
 				/>
-				<Card className='w-full md:w-11/12 mt-2 mx-auto  '>
+				<Card className='w-full md:w-11/12 mt-2 mx-auto   '>
 					<CardContent className='grid grid-cols-1 gap-2'>
 						<div className='grid grid-cols-1 items-center justify-between '>
 							<div className='flex items-center space-x-2 mt-3'>
@@ -178,11 +178,6 @@ export default function Idaluno() {
 									</SelectContent>
 								</Select>
 							</div>
-							<Link
-								className='bg-blue-500 text-white w-[180px] font-medium justify-self-center text-sm  md:mt-0 mt-2 rounded-md text-center  p-2'
-								to={"feito"}>
-								Lançar Treino
-							</Link>
 
 							{/* <input
                 className="font-medium text-right text-green-600 border-b p-2"

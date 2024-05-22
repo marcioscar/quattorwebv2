@@ -9,6 +9,15 @@ export const getExercicios = async (id: any) => {
   });
 };
 
+export const getExercise = async (id: any) => {
+  return prisma.treinos.findUnique({
+    where: {
+      id,
+    },
+  });
+};
+
+
 export const getExercisebyGroup = async (group: any, week:any) => {
   return prisma.treinos.findMany({
     where: {

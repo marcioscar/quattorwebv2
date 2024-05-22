@@ -76,7 +76,8 @@ export const action: ActionFunction = async ({ request }) => {
 	const form = await request.formData();
 
 	let values = Object.fromEntries(form);
-	console.log(form.get("_action"));
+	console.log(values);
+
 	const _action = form.get("_action");
 	if (_action === "done") {
 		await updateHistoricoExe(values);
