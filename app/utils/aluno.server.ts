@@ -5,7 +5,9 @@ import { prisma } from "./prisma.server";
 import fetch from "@remix-run/web-fetch";
 import { v4 as uuidv4 } from "uuid";
 
-import _ from "lodash";
+import _, { orderBy } from "lodash";
+import Planejamento from "@/routes/aluno.planejamento";
+import { Title } from "chart.js";
 
 const EVO_AUTH = process.env.NEXT_PUBLIC_EVO_AUTH;
 
@@ -291,37 +293,114 @@ export const deleteAluno = async (aluno: any) => {
   });
 };
 
-export const updatePlanejamento = async (historico: any, dias: any) => {
-  const treino = historico.treinolivre
-    ? historico.treinolivre.toUpperCase()
-    : historico.treino.toUpperCase();
+// export const updatePlanejamento = async (historico: any, dias: any) => {
+//   const treino = historico.treinolivre
+//     ? historico.treinolivre.toUpperCase()
+//     : historico.treino.toUpperCase();
 
-  return prisma.historico.upsert({
+//   return prisma.historico.upsert({
+//     where: {
+//       aluno: parseInt(historico.aluno),
+//     },
+//     update: {
+//       planejados: {
+//         push: {
+//           treinoP: treino,
+//           dia: dias,
+//           id: uuidv4(),
+//           feito: false,
+//         },
+//       },
+//     },
+//     create: {
+//       aluno: parseInt(historico.aluno),
+//       planejados: {
+//         treinoP: treino,
+//         dia: dias,
+//         id: uuidv4(),
+//         // data: new Date(Date.parse(historico.data)),
+//         feito: false,
+//       },
+//     },
+//   });
+// };
+
+export const updatePlanejamento = async (historico: any, treinosPlanejados: any) => {
+   
+//   const treino = historico.treinolivre
+//     ? historico.treinolivre.toUpperCase()
+//     : historico.treino.toUpperCase();
+
+// const existPlaned = await prisma.historico.findFirst({
+//       where: {
+//         AND: [
+//           { aluno: parseInt(historico.aluno) },
+//           { planejados: { some : { title: historico.numero } } },
+          
+//         ],
+//       },
+// })
+
+const existPlaned = await prisma.historico.findFirst({
+      where: {
+           aluno: parseInt(historico.aluno) 
+      },
+})
+
+const existExercise = _.filter(existPlaned?.planejados, {'title': historico.numero}).length
+
+console.log(existExercise)
+
+if (existExercise) {
+    return prisma.historico.update({
+      where: {
+        aluno: parseInt(historico.aluno),
+      },
+      data: {
+        planejados: {
+          updateMany: {
+            where: {
+              title: historico.numero,
+              
+            },
+            data: { data: treinosPlanejados },
+          },
+        },
+      },
+    });
+}else{
+return prisma.historico.upsert({
     where: {
       aluno: parseInt(historico.aluno),
     },
     update: {
       planejados: {
         push: {
-          treinoP: treino,
-          dia: dias,
+          data: treinosPlanejados,
           id: uuidv4(),
           feito: false,
+          title: historico.numero
         },
       },
     },
     create: {
       aluno: parseInt(historico.aluno),
       planejados: {
-        treinoP: treino,
-        dia: dias,
-        id: uuidv4(),
-        // data: new Date(Date.parse(historico.data)),
-        feito: false,
+         data: treinosPlanejados,
+          id: uuidv4(),
+          feito: false,
+          title: historico.numero
       },
     },
   });
-};
+}
+}
+
+  
+       
+  
+
+  
 
 export const TreinoPlanejadoFeito = async (treino: any) => {
   let dataformatada = "";
@@ -479,8 +558,51 @@ export const getHistorico = async (historico: any) => {
     where: {
       aluno: parseInt(historico),
     },
-  });
+  }
+)
 };
+
+
+export const getPlaned = async (historico: any) => {
+  if (!historico) {
+    return null;
+  }
+
+    const planejados = (await prisma.historico.findUnique({
+        where: {
+            aluno: parseInt(historico),
+        },
+        
+    }))
+console.log(planejados)
+    // const exercicios = _.orderBy(exe?.histexe, 'data', "desc")
+    
+//     const resp = ( _.map(
+// 				_.mapValues(exercicios, function (o: any) {
+// 					return {
+// 						treino: o.nome,
+// 						carga: o.carga,
+// 						grupo: o.grupo,
+// 						obs: o.obs,
+// 						date: format(new Date(o.data), "EEE - dd/MM", {locale: ptBR}),
+// 					};
+// 				})
+// 			))
+
+//     const result = _.chain(_.take(resp, 60))
+//         .groupBy("date")
+//         .map(users => ({
+//             title: users[0].date,
+//             // order: users[0].order,
+//             data: users.map(({  ...o }) => o)
+//         }))
+//         .value();
+
+//   return result
+
+};
+
+
 
 export const getHistoricoExe = async (historico: any) => {
   if (!historico) {
@@ -501,9 +623,6 @@ export const getHistoricoExeDate = async (historico: any) => {
     return null;
   }
 
-
-
-
     const exe = (await prisma.historicoExercicios.findUnique({
         where: {
             aluno: parseInt(historico),
@@ -513,8 +632,7 @@ export const getHistoricoExeDate = async (historico: any) => {
 
     const exercicios = _.orderBy(exe?.histexe, 'data', "desc")
     
-
- const resp = ( _.map(
+    const resp = ( _.map(
 				_.mapValues(exercicios, function (o: any) {
 					return {
 						treino: o.nome,
@@ -526,9 +644,6 @@ export const getHistoricoExeDate = async (historico: any) => {
 				})
 			))
 
-
-
-
     const result = _.chain(_.take(resp, 60))
         .groupBy("date")
         .map(users => ({
@@ -538,8 +653,6 @@ export const getHistoricoExeDate = async (historico: any) => {
         }))
         .value();
 
-        
-console.log(result)
   return result
 
 };
@@ -554,6 +667,24 @@ export const deleteTreinoPlanejado = async (treino: any) => {
         deleteMany: {
           where: {
             id: treino.id,
+          },
+        },
+      },
+    },
+  });
+};
+export const deleteTreinoPlanejadoNumero = async (treino: any) => {
+    console.log(treino)
+    
+  return prisma.historico.update({
+    where: {
+      aluno: parseInt(treino.aluno),
+    },
+    data: {
+      planejados: {
+        deleteMany: {
+          where: {
+            title: treino.title,
           },
         },
       },

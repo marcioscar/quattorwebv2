@@ -1,14 +1,14 @@
 import {
-	deleteTreinoPlanejadoDia,
+	deleteTreinoPlanejadoNumero,
 	getAluno,
 	getHistorico,
 	updateFicha,
 } from "@/utils/aluno.server";
 import {
-	ActionFunction,
 	json,
 	redirect,
 	type LoaderFunction,
+	type ActionFunction,
 } from "@remix-run/node";
 import {
 	Form,
@@ -18,7 +18,7 @@ import {
 	useNavigation,
 } from "@remix-run/react";
 import _ from "lodash";
-import { AiFillEdit } from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -35,14 +35,29 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+	DialogClose,
+} from "@/components/ui/dialog";
+
 import { format } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 export const loader: LoaderFunction = async ({ request, params }) => {
 	const alunoa = await getAluno(Number(params.idaluno));
 	const aluno = alunoa[0];
 
 	const historico = await getHistorico(Number(params.idaluno));
+	// console.log(historico);
 	return json({ aluno, historico });
 };
 
@@ -51,8 +66,8 @@ export const action: ActionFunction = async ({ request }) => {
 	let values = Object.fromEntries(form);
 	const _action = form.get("_action");
 	if (_action === "delete") {
-		//  await deleteTreinoPlanejado(values);
-		await deleteTreinoPlanejadoDia(values);
+		await deleteTreinoPlanejadoNumero(values);
+		console.log(values);
 	}
 	if (_action === "salvar") {
 		await updateFicha(values);
@@ -64,7 +79,8 @@ export const action: ActionFunction = async ({ request }) => {
 export default function Idaluno() {
 	const { aluno, historico }: any = useLoaderData();
 	const ultimosTreinos = _.takeRight(historico?.treinos, 3);
-
+	const planejadosOrdenado = _.sortBy(historico?.planejados, ["title"]);
+	console.log(planejadosOrdenado);
 	const transition = useNavigation();
 
 	// const PlaneTreino = _.mapValues(
@@ -122,6 +138,7 @@ export default function Idaluno() {
 	);
 
 	const ultimos = _.takeRight(grupotreino, 7);
+	console.log(historico.planejados.length);
 	const ultimosFeitos = _.takeRight(grupotreinoFeito, 7);
 
 	return (
@@ -223,14 +240,91 @@ export default function Idaluno() {
 					</CardContent>
 				</Card>
 			</Form>
-			<div className='w-full  '>
+			<div className='container'>
 				<div>
-					{ultimos && (
+					{planejadosOrdenado.length !== 0 && (
 						<>
 							<h2 className='   text-stone-600 rounded-md font-semibold  text-center text-lg m-4'>
 								Treinos Planejados
 							</h2>
-							<div className='text-stone-600 text-center place-content-center gap-2 container mx-auto grid grid-cols-2 md:gap-2 md:grid-cols-4 lg:grid-cols-7 lg:container-2xl'>
+							<div className='text-stone-600 text-center place-content-center gap-2  mx-auto grid grid-cols-1 md:gap-2 md:grid-cols-4 lg:grid-cols-4 lg:container-2xl'>
+								{planejadosOrdenado.map((t: any) => (
+									<Form method='post' key={t.id}>
+										<Card className=' w-full min-h-full min-w-full'>
+											<CardHeader>
+												<div className='flex items-center space-x-2 place-content-center '>
+													<CardTitle> Treino {t.title}</CardTitle>
+													<input hidden name='title' readOnly value={t.title} />
+													<input
+														hidden
+														name='aluno'
+														readOnly
+														value={historico.aluno}
+													/>
+													<div>
+														<Dialog>
+															<DialogTrigger asChild>
+																<Button
+																	size='xs'
+																	variant='outline'
+																	className=' border border-none shadow-none'>
+																	<AiFillDelete className='h-5 w-5 text-red-500   ' />
+																</Button>
+															</DialogTrigger>
+															<DialogContent>
+																<Form method='post'>
+																	<DialogHeader>
+																		<DialogTitle className=' text-stone-600'>
+																			Tem Certeza que quer apagar
+																		</DialogTitle>
+																		<Separator className='my-4' />
+																		<DialogDescription className='mt-8'>
+																			<div className='flex h-5 place-content-center items-center  text-orange-500 text-lg  space-x-4  font-bold'>
+																				<div>Treino {t.title}</div>
+																			</div>
+																		</DialogDescription>
+																	</DialogHeader>
+																	<input
+																		hidden
+																		name='aluno'
+																		readOnly
+																		value={historico.aluno}
+																	/>
+																	<input
+																		hidden
+																		name='title'
+																		readOnly
+																		value={t.title}
+																	/>
+																	<DialogFooter>
+																		<DialogClose asChild>
+																			<button
+																				type='submit'
+																				className='rounded-xl mt-2 bg-red-500 text-white px-3 py-2 font-semibold transition duration-300 ease-in-out hover:bg-red-700 hover:-translate-y-1'
+																				name='_action'
+																				value='delete'>
+																				Apagar
+																			</button>
+																		</DialogClose>
+																	</DialogFooter>
+																</Form>
+															</DialogContent>
+														</Dialog>
+														{/* <AiFillDelete className='h-5 w-5 text-red-500   ' /> */}
+													</div>
+												</div>
+												<CardDescription>
+													{t.data.map((d: any, index: any) => (
+														<div key={index}>{d}</div>
+													))}
+												</CardDescription>
+											</CardHeader>
+										</Card>
+									</Form>
+								))}
+							</div>
+
+							{/* <div className='text-stone-600 text-center place-content-center gap-2 container mx-auto grid grid-cols-2 md:gap-2 md:grid-cols-4 lg:grid-cols-7 lg:container-2xl'>
 								<Card>
 									<CardHeader>
 										<CardTitle>Segunda</CardTitle>
@@ -516,16 +610,14 @@ export default function Idaluno() {
 																to={s.id}>
 																<AiFillEdit className='w-5 h-5  text-teal-500' />
 															</Link>
-															{/* <button name="_action" value="delete">
-                                <AiFillCloseCircle className="w-5 h-5  text-red-500" />
-                              </button> */}
+									
 														</Form>
 													</div>
 												))}
 										</CardDescription>
 									</CardHeader>
 								</Card>
-							</div>
+							</div> */}
 						</>
 					)}
 				</div>

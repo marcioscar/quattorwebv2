@@ -117,7 +117,7 @@ export default function Index() {
 						<a
 							href='https://wa.me/5561993190568'
 							className='mt-2 inline-flex items-center   text-white  '>
-							<Button className='shadow-lg shadow-stone-400/75 bg-orange-400 rounded-xl text-xl w-36'>
+							<Button className='shadow shadow-stone-400/75 bg-orange-400 rounded-xl text-xl w-36'>
 								Agendar
 							</Button>
 						</a>
@@ -142,7 +142,7 @@ export default function Index() {
 						<a
 							href='https://wa.me/5561993190568'
 							className='mt-8  inline-flex items-center  text-stone-800  '>
-							<Button className=' shadow-xl shadow-stone-400/75 bg-orange-400 text-white text-2xl rounded-xl  w-60'>
+							<Button className=' shadow shadow-stone-400/75 bg-orange-400 text-white text-2xl rounded-xl  w-60'>
 								Agendar
 							</Button>
 						</a>

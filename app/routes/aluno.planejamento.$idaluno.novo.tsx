@@ -7,28 +7,16 @@ import {
 	useRouteLoaderData,
 } from "@remix-run/react";
 import { FaWindowClose } from "react-icons/fa";
-import {
-	Popover,
-	PopoverContent,
-	PopoverTrigger,
-} from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { cn } from "@/lib/utils";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { updatePlanejamento } from "@/utils/aluno.server";
-import { Check, ChevronsUpDown } from "lucide-react";
-import {
-	Command,
-	CommandEmpty,
-	CommandGroup,
-	CommandInput,
-	CommandItem,
-} from "@/components/ui/command";
 import { treinos } from "@/utils/treinos.server";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
+
+import { useForm } from "react-hook-form";
 
 export const loader: LoaderFunction = async ({ request, params }) => {
 	const grupos = treinos;
@@ -38,6 +26,9 @@ export const action: ActionFunction = async ({ request }) => {
 	const form = await request.formData();
 	let values = Object.fromEntries(form);
 	var dias = [];
+
+	const treinosPlanejados = form.getAll("treinos");
+	console.log(values);
 
 	if (values.segunda) {
 		dias.push("segunda");
@@ -61,11 +52,12 @@ export const action: ActionFunction = async ({ request }) => {
 		dias.push("domingo");
 	}
 
-	const planejado = await updatePlanejamento(values, dias);
+	const planejado = await updatePlanejamento(values, treinosPlanejados);
 
 	return redirect(`..`);
 };
 export default function Novo() {
+	const form = useForm;
 	const { grupos } = useLoaderData();
 
 	const { aluno } = useRouteLoaderData("routes/aluno.planejamento.$idaluno");
@@ -82,12 +74,27 @@ export default function Novo() {
 	return (
 		<Modal onClose={closeHandler}>
 			<Form
+				{...form}
 				method='post'
-				className='font-semibold grid space-x-2 space-y-4 grid-cols-1 md:grid-cols-2 '>
+				className='font-semibold grid space-x-2 space-y-4 bg-white md:w-96  '>
 				<div className=' md:col-span-2 text-center mb-4'>
 					Planejamento de treino - {aluno.firstName}{" "}
 				</div>
-				<Popover open={open} onOpenChange={setOpen}>
+				<select
+					// onChange={(event) => setSemana(event.target.value)}
+					id='numero'
+					name='numero'
+					className='rounded-md col-span-2 border-2  block
+                          w-full '>
+					<option value='01'>Treino 1</option>
+					<option value='02'>Treino 2</option>
+					<option value='03'>Treino 3</option>
+					<option value='04'>Treino 4</option>
+					<option value='05'>Treino 5</option>
+					<option value='06'>Treino 6</option>
+					<option value='07'>Treino 7</option>
+				</select>
+				{/* <Popover open={open} onOpenChange={setOpen}>
 					<PopoverTrigger asChild>
 						<Button
 							variant='outline'
@@ -103,7 +110,7 @@ export default function Novo() {
 							<ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
 						</Button>
 					</PopoverTrigger>
-					<PopoverContent className='w-[300px] p-0'>
+					<PopoverContent className='w-[300px] bg-white p-0'>
 						<Command>
 							<CommandInput placeholder='Procurar Treino...' />
 							<CommandEmpty>Treino não encontrado</CommandEmpty>
@@ -133,18 +140,12 @@ export default function Novo() {
 							</CommandGroup>
 						</Command>
 					</PopoverContent>
-				</Popover>
+				</Popover> */}
 				<div className=' text-left'>
 					{/* <input hidden required value={date} id="data" name="data" /> */}
 					<input hidden value={aluno.idMember} id='aluno' name='aluno' />
-					<input hidden value={treino} name='treino' id='treino'></input>
-					<Input
-						className='md:col-span-2'
-						type='text'
-						id='treinolivre'
-						name='treinolivre'
-						placeholder='Treino Livre'
-					/>
+					{/* <input hidden value={treino} name='treino' id='treino'></input> */}
+
 					{/* <Popover>
             <PopoverTrigger asChild>
               <Button
@@ -170,14 +171,39 @@ export default function Novo() {
               />
             </PopoverContent>
           </Popover> */}
-				</div>
-				<div className='grid grid-cols-3 md:flex items-center '>
-					<div className='md:flex'>
+
+					{grupos.map((grupo: any) => (
+						<div className='md:flex' key={grupo.value}>
+							<Checkbox
+								value={grupo.value}
+								id='treinos'
+								name='treinos'
+								className='mr-1'
+							/>
+							<label
+								htmlFor={grupo.label}
+								className='text-sm  mr-7  text-stone-700  peer-disabled:cursor-not-allowed peer-disabled:opacity-70'>
+								{grupo.label}
+							</label>
+						</div>
+					))}
+					<div className='flex'>
+						<label htmlFor='livre' className=''>
+							<Input
+								name='treinos'
+								id='treinos'
+								className='  h-6 w-96'
+								placeholder='Treino Livre'
+							/>
+						</label>
+					</div>
+
+					{/* <div className='md:flex'>
 						<Checkbox id='segunda' name='segunda' className='mr-1' />
 						<label
 							htmlFor='segunda'
 							className='text-sm  mr-7  text-stone-700  peer-disabled:cursor-not-allowed peer-disabled:opacity-70'>
-							Segunda
+							1
 						</label>
 					</div>
 					<div className='md:flex'>
@@ -185,7 +211,7 @@ export default function Novo() {
 						<label
 							htmlFor='terca'
 							className='text-sm mr-7 text-stone-700  peer-disabled:cursor-not-allowed peer-disabled:opacity-70'>
-							Terça
+							2
 						</label>
 					</div>
 					<div className='md:flex'>
@@ -193,7 +219,7 @@ export default function Novo() {
 						<label
 							htmlFor='quarta'
 							className='text-sm mr-7 text-stone-700  peer-disabled:cursor-not-allowed peer-disabled:opacity-70'>
-							Quarta
+							3
 						</label>
 					</div>
 					<div className='md:flex'>
@@ -201,7 +227,7 @@ export default function Novo() {
 						<label
 							htmlFor='quinta'
 							className='text-sm mr-7 text-stone-700  peer-disabled:cursor-not-allowed peer-disabled:opacity-70'>
-							Quinta
+							4
 						</label>
 					</div>
 					<div className='md:flex'>
@@ -209,7 +235,7 @@ export default function Novo() {
 						<label
 							htmlFor='sexta'
 							className='text-sm mr-7 text-stone-700  peer-disabled:cursor-not-allowed peer-disabled:opacity-70'>
-							Sexta
+							5
 						</label>
 					</div>
 					<div className='md:flex'>
@@ -217,7 +243,7 @@ export default function Novo() {
 						<label
 							htmlFor='sabado'
 							className='text-sm mr-7 text-stone-700  peer-disabled:cursor-not-allowed peer-disabled:opacity-70'>
-							Sábado
+							6
 						</label>
 					</div>
 					<div className='md:flex'>
@@ -225,9 +251,9 @@ export default function Novo() {
 						<label
 							htmlFor='domingo'
 							className='text-sm mr-7 text-stone-700  peer-disabled:cursor-not-allowed peer-disabled:opacity-70'>
-							Domingo
+							7
 						</label>
-					</div>
+					</div> */}
 				</div>
 
 				<Button

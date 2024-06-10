@@ -86,7 +86,7 @@ export const updateCadastroTreino = async (
 };
 
 export const updateTreino = async (treino: any) => {
-    console.log(treino)
+    
   const existe = await prisma.treinos.findFirst({
     where: {
       grupo: treino.grupo,

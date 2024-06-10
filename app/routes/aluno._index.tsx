@@ -11,7 +11,6 @@ import {
 	deleteHistoricoExe,
 } from "~/utils/aluno.server";
 import { getWeek } from "date-fns";
-import format from "date-fns/format";
 import { useEffect, useState } from "react";
 import _ from "lodash";
 import { FaSyncAlt, FaExclamationCircle, FaDumbbell } from "react-icons/fa";
@@ -19,24 +18,12 @@ import { FaSyncAlt, FaExclamationCircle, FaDumbbell } from "react-icons/fa";
 import { MdDone, MdOutlineRemove } from "react-icons/md";
 
 import { FiVideo } from "react-icons/fi";
-import { TbHandClick } from "react-icons/tb";
 import { commitSession, getSession } from "~/session.server";
-import {
-	Card,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
 
-import {
-	Accordion,
-	AccordionContent,
-	AccordionItem,
-	AccordionTrigger,
-} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import Feitos from "@/components/Feitos";
 import Planejados from "@/components/Planejados";
+import { Card, CardDescription, CardHeader } from "@/components/ui/card";
 
 type grupo = {
 	grupo: string;
@@ -66,11 +53,13 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
 	// const historicoTreinos = await getHistorico(4);
 	const historicoTreinos = await getHistorico(Number(session.get("aluno").id));
+	const planejados = _.sortBy(historicoTreinos?.planejados, ["title"]);
+
 	const historicoExercicios = await getHistoricoExe(
 		Number(session.get("aluno").id)
 	);
 
-	return json({ aluno, treinosGrupo, historicoTreinos, historicoExercicios });
+	return json({ aluno, treinosGrupo, planejados, historicoExercicios });
 };
 export const action: ActionFunction = async ({ request }) => {
 	const form = await request.formData();
@@ -93,7 +82,7 @@ export default function Treino() {
 	const fetcher = useFetcher();
 	const isSaving = fetcher.state !== "idle";
 
-	const { aluno, treinosGrupo, historicoTreinos, historicoExercicios } =
+	const { aluno, treinosGrupo, planejados, historicoExercicios } =
 		useLoaderData<typeof loader>();
 
 	const data = fetcher.data;
@@ -123,7 +112,7 @@ export default function Treino() {
 	// 	return { data: idx, treino: data };
 	// });
 
-	const PlaneTreino = _.mapValues(historicoTreinos?.planejados, function (o) {
+	const PlaneTreino = _.mapValues(planejados?.planejados, function (o) {
 		return { treino: o.treinoP, dia: o.dia };
 	});
 
@@ -391,12 +380,12 @@ export default function Treino() {
             </>
           )} */}
 					<div className=''>
-						{historicoTreinos?.planejados.length > 0 && (
+						{planejados?.length > 0 && (
 							<>
-								<div className=' bg-stone-100  rounded-md mb-2 items-center place-content-center gap-2 text-center flex text-stone-600 font-light '>
+								{/* <div className=' bg-stone-100  rounded-md mb-2 items-center place-content-center gap-2 text-center flex text-stone-600 font-light '>
 									<TbHandClick className='text-stone-600 text-xl' />
 									<div>no treino para ver os exercícios</div>
-								</div>
+								</div> */}
 								<div>
 									<h2 className='  text-stone-500 font-medium mb-2 text-center mt-2'>
 										Treinos Planejados
@@ -404,13 +393,28 @@ export default function Treino() {
 								</div>
 
 								<div className='text-stone-600 text-center place-content-center gap-2  mx-auto grid grid-cols-2 md:gap-2 md:grid-cols-4 lg:grid-cols-7 lg:container-2xl'>
-									{Planejados(historicoTreinos, "segunda")}
+									{planejados.map((t: any) => (
+										<Card key={t.id} className=' w-full min-h-full min-w-full'>
+											<CardHeader>
+												<div className=' font-medium text-orange-400'>
+													Treino {t.title}
+												</div>
+												<CardDescription>
+													{t.data.map((d: any, index: any) => (
+														<div key={index}>{d}</div>
+													))}
+												</CardDescription>
+											</CardHeader>
+										</Card>
+									))}
+
+									{/* {Planejados(historicoTreinos, "segunda")}
 									{Planejados(historicoTreinos, "terca")}
 									{Planejados(historicoTreinos, "quarta")}
 									{Planejados(historicoTreinos, "quinta")}
 									{Planejados(historicoTreinos, "sexta")}
 									{Planejados(historicoTreinos, "sabado")}
-									{Planejados(historicoTreinos, "domingo")}
+									{Planejados(historicoTreinos, "domingo")} */}
 									{/* <Card>
 										<CardHeader>
 											<CardTitle>Segunda</CardTitle>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "@remix-run/react";
 import { IoMdMenu, IoMdClose, IoIosLogOut } from "react-icons/io";
+import { GiMuscleUp } from "react-icons/gi";
 
 export default function Index(aluno: any) {
 	const [navbar, setNavbar] = useState(false);
@@ -37,15 +38,16 @@ export default function Index(aluno: any) {
 							</>
 						)}
 						{!aluno.aluno?.idMember && (
-							<div className=' border items-center space-x-2 bg-black  shadow rounded-xl   p-2 flex md:hidden '>
+							<div className=' border items-center space-x-2  bg-orange-400 shadow rounded-xl   p-2 flex md:hidden '>
 								<div>
-									<img
+									<GiMuscleUp className='text-white' />
+									{/* <img
 										src='/assets/avatarlauno.png'
 										alt='logo'
 										className='w-5'
-									/>
+									/> */}
 								</div>
-								<div className='text-sm text-white '>
+								<div className='text-sm  text-white '>
 									<NavLink
 										to='/login'
 										prefetch='render'
