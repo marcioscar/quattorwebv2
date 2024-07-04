@@ -42,7 +42,7 @@ export default function Treino() {
                       />
                       {exec.carga}
                     </div> */}
-										<div className='items-center flex font-semibold text-lg mb-2'>
+										<div className='items-center flex italic  font-medium text-3xl mt-1 mb-2'>
 											{/* <ImSortNumbericDesc className=" h-4 w-4 text-gray-400 mr-3" /> */}
 											<img
 												src='/ponto_vermelho.svg'
@@ -74,7 +74,7 @@ export default function Treino() {
 				<img
 					className=' h-[80px] pt-1 mx-auto items-center'
 					alt='footer'
-					src='/semana6.svg'
+					src='/semana1.svg'
 				/>
 			</footer>
 			{/* <footer>

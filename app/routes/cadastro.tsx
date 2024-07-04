@@ -114,18 +114,18 @@ export default function Cadastro() {
 													{...register("semana")}
 													className='rounded-md border-2 form-control block
                           w-full '>
-													<option value='211'>treino 1 </option>
-													<option value='212'>treino 2</option>
-													<option value='213'>treino 3</option>
-													<option value='214'>treino 4</option>
-													<option value='215'>treino 5</option>
-													<option value='216'>treino 6</option>
-													<option value='217'>Melhor de Todas</option>
-													<option value='218'>Melhor de Todas 2</option>
-													<option value='201'>Iniciante 1</option>
-													<option value='202'>Iniciante 2</option>
-													<option value='203'>Iniciante 3</option>
-													<option value='204'>Iniciante 4</option>
+													<option value='311'>treino 1 </option>
+													<option value='312'>treino 2</option>
+													<option value='313'>treino 3</option>
+													<option value='314'>treino 4</option>
+													<option value='315'>treino 5</option>
+													<option value='316'>treino 6</option>
+													<option value='317'>Melhor de Todas</option>
+													<option value='318'>Melhor de Todas 2</option>
+													<option value='301'>Iniciante 1</option>
+													<option value='302'>Iniciante 2</option>
+													<option value='303'>Iniciante 3</option>
+													<option value='304'>Iniciante 4</option>
 												</select>
 												<Errors className='text-red-500' />
 											</div>

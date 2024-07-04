@@ -54,7 +54,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 	// const historicoTreinos = await getHistorico(4);
 	const historicoTreinos = await getHistorico(Number(session.get("aluno").id));
 	const planejados = _.sortBy(historicoTreinos?.planejados, ["title"]);
-
+	console.log(planejados);
 	const historicoExercicios = await getHistoricoExe(
 		Number(session.get("aluno").id)
 	);

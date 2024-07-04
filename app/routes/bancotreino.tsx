@@ -29,18 +29,18 @@ export default function Treino() {
 						name='semana_query'
 						onChange={(event) => semana.submit(event.target.form)}
 						className='rounded-md border-2 form-control block'>
-						<option value='211'>Treino 01 </option>
-						<option value='212'>Treino 02 </option>
-						<option value='213'>Treino 03 </option>
-						<option value='214'>Treino 04 </option>
-						<option value='215'>Treino 05 </option>
-						<option value='216'>Treino 06 </option>
-						<option value='217'>Melhor de Todas </option>
-						<option value='218'>Melhor de Todas 2</option>
-						<option value='201'>Iniciante 1</option>
-						<option value='202'>Iniciante 2</option>
-						<option value='203'>Iniciante 3</option>
-						<option value='204'>Iniciante 4</option>
+						<option value='311'>Treino 01 </option>
+						<option value='312'>Treino 02 </option>
+						<option value='313'>Treino 03 </option>
+						<option value='314'>Treino 04 </option>
+						<option value='315'>Treino 05 </option>
+						<option value='316'>Treino 06 </option>
+						<option value='317'>Melhor de Todas </option>
+						<option value='318'>Melhor de Todas 2</option>
+						<option value='301'>Iniciante 1</option>
+						<option value='302'>Iniciante 2</option>
+						<option value='303'>Iniciante 3</option>
+						<option value='304'>Iniciante 4</option>
 					</select>
 				</semana.Form>
 			</div>
@@ -67,7 +67,7 @@ export default function Treino() {
 									<th className='py-1 flex gap-x-2 items-center font-medium text-gray-900 whitespace-nowrap dark:text-white'>
 										{treino.grupo}
 									</th>
-									<td className=' text-center'>{treino.semana - 100}</td>
+									<td className=' text-center'>{treino.semana}</td>
 									<td className='  '>
 										<Link to={`${treino.id}`} className='text-sky-600 text-lg '>
 											{/* Exercícios */}
