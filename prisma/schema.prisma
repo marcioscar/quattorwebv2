@@ -101,3 +101,11 @@ model grupo {
     inicio DateTime? @db.Date
     fim    DateTime? @db.Date
 }
+
+model turmas {
+    id        String @id @default(auto()) @map("_id") @db.ObjectId
+    nome      String
+    sobrenome String
+    matricula String
+    turma     String
+}

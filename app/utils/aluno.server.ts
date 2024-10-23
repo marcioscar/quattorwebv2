@@ -14,6 +14,7 @@ const EVO_AUTH = process.env.NEXT_PUBLIC_EVO_AUTH;
 export const getAluno = async (matricula: number) => {
   const aluno = await fetch(
     `https://evo-integracao.w12app.com.br/api/v1/members/basic?idMember=${matricula}&take=1&skip=0`,
+    
 
     {
       method: "GET",
@@ -30,7 +31,32 @@ export const getAluno = async (matricula: number) => {
 
 
 
- 
+ export const getSale = async (matricula: string) => {
+  if (!matricula) {
+    return null;
+  }
+  try {
+    const sale = await fetch(
+        `https://evo-integracao.w12app.com.br/api/v1/receivables?take=50&skip=0&memberId=${matricula}`,
+        // `https://evo-integracao.w12app.com.br/api/v1/membership?idMembership=67050&take=25&skip=0`,
+        // `https://evo-integracao.w12app.com.br/api/v1/sales/${matricula}`,
+    //   `https://evo-integracao.w12app.com.br/api/v1/membermembership/${matricula}`,
+    // `https://evo-integracao.w12app.com.br/api/v1/sales?idMember=${matricula}&showReceivables=false&take=25&skip=0&onlyMembership=false&atLeastMonthly=false&showOnlyActiveMemberships=false`,
+
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Basic " + btoa(EVO_AUTH as string),
+        },
+      }
+    );
+   
+
+    return sale.json();
+  } catch (error) {
+    throw error;
+  }
+};
  
 
 export const gstBasico = async (matricula: number) => {
@@ -127,6 +153,8 @@ export const getTreinosSemanal = async (semana: number) => {
     },
   });
 };
+
+
 
 export const updateHistorico = async (historico: any) => {
   return prisma.historico.upsert({
@@ -275,6 +303,12 @@ export const getGrupo = async (grupo: any) => {
 export const getGrupos = async () => {
   return prisma.grupo.findMany();
 };
+
+export const getTurmas = async () => {
+  
+    return prisma.turmas.findMany();
+};
+
 
 export const deleteAluno = async (aluno: any) => {
   return prisma.grupo.update({
