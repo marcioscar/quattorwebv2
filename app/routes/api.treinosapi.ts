@@ -9,9 +9,10 @@ export const loader = async ({ request,params }: LoaderFunctionArgs) => {
   let week = searchParams?.get("week");
   
     const treinos = await getTreinos(week);
-console.log(treinos)
+
   const grupos = treinos.map((t)=>t.grupo) 
-  return grupos  
+
+  return [...grupos].sort()  
   // return json({ grupos });
 };
 
