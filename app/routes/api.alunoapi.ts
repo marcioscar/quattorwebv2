@@ -53,8 +53,16 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   
     switch (request.method) {
     case "POST": {
-            const param = await request.json();
-            const registration = param? parseInt(param.registration): 0
+
+    const url = new URL(request.url);
+    const queryParams = Object.fromEntries(url.searchParams);
+
+    console.log( queryParams.registration);
+
+
+            // const param = await request.json();
+
+            const registration = queryParams.registration? parseInt(queryParams.registration): 0
             
             const alunoa = await getAluno(registration );
             const aluno = alunoa[0]? alunoa[0]: '';

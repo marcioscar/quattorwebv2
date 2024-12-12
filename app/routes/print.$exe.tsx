@@ -74,7 +74,7 @@ export default function Treino() {
 				<img
 					className=' h-[80px] pt-1 mx-auto items-center'
 					alt='footer'
-					src='/ciclo4 - semana1.svg'
+					src='/semana 5.svg'
 				/>
 			</footer>
 			{/* <footer>
