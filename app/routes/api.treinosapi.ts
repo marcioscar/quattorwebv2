@@ -20,9 +20,14 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   
     switch (request.method) {
     case "POST": {
-         const param = await request.json();
-            const group = param.groupSelected
-            const week = param.week
+
+        const url = new URL(request.url);
+    const queryParams = Object.fromEntries(url.searchParams);
+    console.log(queryParams)
+
+        //  const param = await request.json();
+            const group = queryParams.groupSelected
+            const week = queryParams.week
             const exercisesGroup =  await getExercisebyGroup(group, week)
             const exercises = _.flatten(exercisesGroup.map((e)=> e.exercicios))
             
