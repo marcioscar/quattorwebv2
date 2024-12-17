@@ -30,11 +30,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
             const week = queryParams.week
             const exercisesGroup =  await getExercisebyGroup(group, week)
             const exercises = _.flatten(exercisesGroup.map((e)=> e.exercicios))
-            
-            return {nome: exercises.map((e)=> e.nome), repeticoes: exercises.map((e)=> e.Repeticoes)}
-            return json({nome: exercises.nome, repeticoes: exercises.Repeticoes}
+            return json(exercises)
 
-            )
+        
       /* handle "POST" */
     }
     case "PUT": {
