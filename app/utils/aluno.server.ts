@@ -214,6 +214,36 @@ export const updateHistoricoExe = async (historico: any) => {
   });
 };
 
+
+export const updateHistoricoAPI = async (aluno:any ,grupo: any) => {
+  let dataformatada = format(
+    endOfDay(new Date()),
+    "yyyy-MM-dd'T'03:00:00.000+00:00"
+  );
+  return prisma.historicoExercicios.upsert({
+    where: {
+      aluno: parseInt(aluno),
+    },
+    update: {
+      histexe: {
+        push: {
+          grupo: grupo,
+          data: dataformatada,
+        },
+      },
+    },
+    create: {
+      aluno: parseInt(aluno),
+      histexe: {
+        grupo: grupo,
+        data: dataformatada,
+      },
+    },
+  });
+};
+
+
+
 export const deleteHistoricoExe = async (treino: any) => {
   let dataformatada = format(
     endOfDay(new Date()),

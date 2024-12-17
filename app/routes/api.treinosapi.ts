@@ -1,3 +1,4 @@
+import { updateHistoricoAPI } from "@/utils/aluno.server";
 import { getExercisebyGroup, getTreinos } from "@/utils/treinos.server";
 import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/react";
@@ -36,7 +37,12 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       /* handle "POST" */
     }
     case "PUT": {
-      /* handle "PUT" */
+      const url = new URL(request.url);
+    const queryParams = Object.fromEntries(url.searchParams);
+
+    const teste = updateHistoricoAPI(queryParams.aluno, queryParams.grupo)
+    console.log(queryParams)
+    return teste
     }
     case "PATCH": {
       /* handle "PATCH" */
