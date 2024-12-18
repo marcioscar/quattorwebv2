@@ -115,7 +115,7 @@ export const getAlunoNome = async (nome: any) => {
   }
   try {
     const aluno = await fetch(
-      `https://evo-integracao.w12app.com.br/api/v1/members?name=${nome}&status=1&take=50&skip=0&onlyPersonal=false`,
+      `https://evo-integracao.w12app.com.br/api/v1/members?name=${nome}&take=50&skip=0&onlyPersonal=false`,
       {
         method: "GET",
         headers: {

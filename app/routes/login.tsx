@@ -43,9 +43,10 @@ export const action: ActionFunction = async ({ request }) => {
 	let alunoGym = [];
 	if (aluno?.membershipStatus === "Inactive") {
 		const alunoGymtudo = await getAlunoGym(Number(matricula));
+
 		alunoGym = alunoGymtudo.map((a: any) => a.gympassId);
 	}
-
+	console.log(alunoGym);
 	const plano = _.filter(aluno.memberships, { membershipStatus: "active" }).map(
 		(n) => n.name
 	);

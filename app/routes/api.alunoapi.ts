@@ -72,6 +72,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
                 const alunoGymtudo = await getAlunoGym(Number(registration));
                 alunoGym = alunoGymtudo.map((a: any) => a.gympassId);
             }
+            
         const Plano = _.filter(aluno.memberships, { membershipStatus: "active" }).map(
             (n) => (n.name)
         );
@@ -88,7 +89,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
             plano: Plano.toString()
         }
             
-
+console.log(alunoGym[0])
             if (!aluno.idMember) {
                 return {
                     message: "Aluno não encontrado",
@@ -99,6 +100,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
                     message: "Seu plano está Inativo | Favor procurar recepção",
                 };
             }
+            console.log(student)
             return json({ student});
         
     }
