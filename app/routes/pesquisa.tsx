@@ -37,11 +37,11 @@ export default function Planejamento() {
 	return (
 		<>
 			<div className=' container mx-auto p-3 bg-stone-50'>
-				<div className='flex place-content-evenly w-full '>
+				<div className='md:flex md:space-y-0 space-y-3 place-content-evenly w-full '>
 					<nome.Form method='get' action='.'>
-						<div className=' flex w-full max-w-sm items-center space-x-2'>
+						<div className=' flex  items-center space-x-2'>
 							<Input
-								className='w-full'
+								className='md:w-96'
 								name='aluno'
 								type='search'
 								placeholder='Nome'
@@ -52,8 +52,13 @@ export default function Planejamento() {
 						</div>
 					</nome.Form>
 					<nome.Form method='get' action='.'>
-						<div className='flex w-full max-w-sm items-center space-x-2'>
-							<Input name='cpf' type='search' placeholder='Cpf' />
+						<div className='flex  space-x-2'>
+							<Input
+								className='md:w-96'
+								name='cpf'
+								type='search'
+								placeholder='Cpf'
+							/>
 							<Button name='cpf' className=' bg-stone-400' type='submit'>
 								Pesquisar
 							</Button>
@@ -61,7 +66,7 @@ export default function Planejamento() {
 					</nome.Form>
 				</div>
 
-				<Table className='w-1/2 '>
+				<Table className='md:w-1/2 '>
 					<TableHeader>
 						<TableRow>
 							<TableHead className='w-[100px]'>Matrícula</TableHead>
