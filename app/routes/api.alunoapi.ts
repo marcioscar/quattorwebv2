@@ -1,4 +1,4 @@
-import { getAluno, getAlunoGym } from "@/utils/aluno.server";
+import { getAluno, getAlunoCPF, getAlunoGym } from "@/utils/aluno.server";
 
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/react";
@@ -57,15 +57,32 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     const url = new URL(request.url);
     const queryParams = Object.fromEntries(url.searchParams);
 
-    console.log( queryParams.registration);
+    
 
 
             // const param = await request.json();
 
-            const registration = queryParams.registration? parseInt(queryParams.registration): 0
+            const registration = queryParams.registration ? queryParams.registration.toString() : "0";
             
-            const alunoa = await getAluno(registration );
+            console.log(parseInt(registration))
+            
+            let alunoa = [];
+            if (registration.length<7){
+                alunoa = await getAluno(parseInt(registration));  
+    
+            } else {
+               alunoa = await getAlunoCPF((registration));  
+            }
+            
+
+
+            // const alunoa = await getAluno(parseInt(registration));
+            
+            
+            
             const aluno = alunoa[0]? alunoa[0]: '';
+
+
 
         let alunoGym = [];
             if (aluno.membershipStatus === "Inactive") {
@@ -89,7 +106,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
             plano: Plano.toString()
         }
             
-console.log(alunoGym[0])
+
             if (!aluno.idMember) {
                 return {
                     message: "Aluno não encontrado",
