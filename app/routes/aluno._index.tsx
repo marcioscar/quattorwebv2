@@ -58,7 +58,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 	const historicoExercicios = await getHistoricoExe(
 		Number(session.get("aluno").id)
 	);
-
+	console.log(historicoExercicios);
 	return json({ aluno, treinosGrupo, planejados, historicoExercicios });
 };
 export const action: ActionFunction = async ({ request }) => {

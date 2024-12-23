@@ -10,6 +10,7 @@ import {
 } from "./ui/accordion";
 
 export default function Feitos(historicoExercicios: any, grupo: String) {
+	console.log(historicoExercicios);
 	const HistoricoExercicios = _.map(
 		_.mapValues(historicoExercicios?.histexe, function (o) {
 			return {
@@ -49,10 +50,13 @@ export default function Feitos(historicoExercicios: any, grupo: String) {
 											<div key={index} className=' '>
 												<div className=' text-sm   text-stone-700 font-semibold'>
 													{s.treino
-														.toLocaleLowerCase()
-														.replace(/(^\w{1})|(\s+\w{1})/g, (letra: String) =>
-															letra.toUpperCase()
-														)}{" "}
+														? s.treino
+																.toLocaleLowerCase()
+																.replace(
+																	/(^\w{1})|(\s+\w{1})/g,
+																	(letra: String) => letra.toUpperCase()
+																)
+														: ""}{" "}
 												</div>
 												<div className=' grid grid-cols-3 place-content-around  gap-3 '>
 													<div className='text-orange-400 mb-3 '>{s.carga}</div>
