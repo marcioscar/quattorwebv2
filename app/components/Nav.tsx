@@ -47,7 +47,7 @@ export default function Index(aluno: any) {
 										className='w-5'
 									/> */}
 								</div>
-								<div className='text-sm  text-white '>
+								{/* <div className='text-sm  text-white '>
 									<NavLink
 										to='/login'
 										prefetch='render'
@@ -57,7 +57,7 @@ export default function Index(aluno: any) {
 										}>
 										ALUNO
 									</NavLink>
-								</div>
+								</div> */}
 							</div>
 						)}
 
@@ -117,7 +117,7 @@ export default function Index(aluno: any) {
 								</li>
 							)}
 
-							<li className='font-semibold text-gray-600 hover:text-blue-600'>
+							{/* <li className='font-semibold text-gray-600 hover:text-blue-600'>
 								<NavLink
 									to='/login'
 									prefetch='render'
@@ -127,7 +127,7 @@ export default function Index(aluno: any) {
 									}>
 									ALUNO
 								</NavLink>
-							</li>
+							</li> */}
 							<li className=' md:hidden font-semibold text-gray-600 hover:text-blue-600'>
 								<NavLink
 									to='/spinning'

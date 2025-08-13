@@ -114,12 +114,12 @@ export default function Cadastro() {
 													{...register("semana")}
 													className='rounded-md border-2 form-control block
                           w-full '>
-													<option value='411'>treino 1 </option>
-													<option value='412'>treino 2</option>
-													<option value='413'>treino 3</option>
-													<option value='414'>treino 4</option>
-													<option value='415'>treino 5</option>
-													<option value='416'>treino 6</option>
+													<option value='511'>treino 1 </option>
+													<option value='512'>treino 2</option>
+													<option value='513'>treino 3</option>
+													<option value='514'>treino 4</option>
+													<option value='515'>treino 5</option>
+													<option value='516'>treino 6</option>
 													<option value='417'>Melhor de Todas</option>
 													<option value='418'>Melhor de Todas 2</option>
 													<option value='401'>Iniciante 1</option>

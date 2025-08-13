@@ -29,14 +29,14 @@ export default function Treino() {
 						name='semana_query'
 						onChange={(event) => semana.submit(event.target.form)}
 						className='rounded-md border-2 form-control block'>
-						<option value='411'>Treino 01 </option>
-						<option value='412'>Treino 02 </option>
-						<option value='413'>Treino 03 </option>
-						<option value='414'>Treino 04 </option>
-						<option value='415'>Treino 05 </option>
-						<option value='416'>Treino 06 </option>
-						<option value='417'>Melhor de Todas </option>
-						<option value='418'>Melhor de Todas 2</option>
+						<option value='511'>Treino 01 </option>
+						<option value='512'>Treino 02 </option>
+						<option value='513'>Treino 03 </option>
+						<option value='514'>Treino 04 </option>
+						<option value='515'>Treino 05 </option>
+						<option value='516'>Treino 06 </option>
+						<option value='517'>Melhor de Todas </option>
+						<option value='518'>Melhor de Todas 2</option>
 						<option value='401'>Iniciante 1</option>
 						<option value='402'>Iniciante 2</option>
 						<option value='403'>Iniciante 3</option>
